@@ -237,7 +237,9 @@ app.get('/recoveryall/:id',function(req,res){
 			});
 			//rimraf.sync('./'+path); //user directory remove
 		}
-	}).deleteMany().exec(); //user inform remove in db
+	}).deleteMany().exec().then(function(respnose){
+				rimraf.sync('./'+path); //user directory remove
+			});; //user inform remove in db; //user inform remove in db
 
 	res.end('ok');
 });
@@ -273,10 +275,11 @@ app.get('/tdeleteall/:id',function(req,res){
 					console.log('Successfully moved file!')
 				});
 		    	});
-			});
-			//rimraf.sync('./'+path); //user directory remove
+			})
 		}
-	}).deleteMany().exec(); //user inform remove in db
+	}).deleteMany().exec().then(function(respnose){
+				rimraf.sync('./'+path); //user directory remove
+			}); //user inform remove in db
 
 	res.end('ok');
 });
@@ -289,7 +292,6 @@ app.get('/delete/:id/:name1',function(req,res){
 	console.log("delete file "+filename);
 	Deleted.find({user_id:user_id, filename:filename}).deleteOne().exec(); //user file remove in db
 	fs.unlinkSync(path); //user file remove in server directory
-	//res.attachment();
 	res.end('ok');
 });
 
@@ -309,8 +311,7 @@ app.get('/download/:id/:name',function(req,res){
 	var user_id = req.params.id;
 	var path = './uploads/'+user_id+'/'+filename;
 	console.log("downloading... "+filename);
-	res.attachment(path);
-	res.end('hello,world\nkeesun,hi', 'UTF-8');
+	res.download(path);
 });
 
 
@@ -337,10 +338,11 @@ app.get('/downloadall/:id',function(req,res){
 	    throw err;
 	});
 	archive.directory(path, true, { date: new Date() });
-	archive.finalize();
-	res.attachment(fileName);
-	fs.unlinkSync(fileName);
-	res.end('ok');
+	archive.finalize().then(function(response){
+		res.download(fileName).then(function(res){
+			fs.unlinkSync(fileName);
+		});
+	});
 });
 
 
