@@ -7,7 +7,8 @@ import EditTodo from "./components/edit-todo.component";
 import TodosList from "./components/todos-list.component";
 import Upload from "./upload.component";
 import Download from "./components/download.component";
-import logo from "./logo.png"; //
+import Deleted from "./components/deleted.component";
+import logo from "./logo.png";
 
 class App extends Component {
   render() {
@@ -33,6 +34,9 @@ class App extends Component {
 							<li className="navbar-item">
 	    						<Link to="/download" className="nav-link">Download</Link>
 	    					</li>
+							<li className="navbar-item">
+	    						<Link to="/deleted" className="nav-link">휴지통</Link>
+	    					</li>
 	    				</ul>
 	    			</div>
 	    		</nav>
@@ -42,6 +46,7 @@ class App extends Component {
 		    	<Route path="/create" component={CreateTodo} />
 				<Route path="/upload" component={Upload} />
 				<Route path="/download" component={Download} />
+				<Route path="/deleted" component={Deleted} />
 	    	</div>
 	    	
     	</Router>

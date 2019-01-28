@@ -1,5 +1,18 @@
 import React, {Component} from 'react';
 import axios from 'axios';
+// Import React FilePond
+import { FilePond, File, registerPlugin } from 'react-filepond';
+// Import FilePond styles
+import 'filepond/dist/filepond.min.css';
+
+// Import the Image EXIF Orientation and Image Preview plugins
+// Note: These need to be installed separately
+import FilePondPluginImageExifOrientation from 'filepond-plugin-image-exif-orientation';
+import FilePondPluginImagePreview from 'filepond-plugin-image-preview';
+import 'filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css';
+
+// Register the plugins
+registerPlugin(FilePondPluginImageExifOrientation, FilePondPluginImagePreview);
 
 export default class CreateTodo extends Component{
 
@@ -15,9 +28,15 @@ export default class CreateTodo extends Component{
 			todo_description: '',
 			todo_responsible:'',
 			todo_priority:'',
-			todo_completed: false
+			todo_completed: false,
+			files:[]
 		}
 	}
+
+	handleInit() {
+        console.log('FilePond instance has initialised', this.pond);
+	}
+	
 	onChangeTodoDescription(e){
 		this.setState({
 			todo_description:e.target.value
@@ -117,6 +136,29 @@ export default class CreateTodo extends Component{
 							<label className ="form-check-label">High</label>
 						</div>
 					</div>
+					<div className="App">
+            
+						{/* Pass FilePond properties as attributes */}
+						<FilePond ref={ref => this.pond = ref}
+								allowMultiple={true} 
+								maxFiles={10} 
+								server="http://socrip4.kaist.ac.kr:3980/upload/kimbbr/"
+								oninit={() => this.handleInit() }
+								onupdatefiles={(fileItems) => {
+									// Set current file objects to this.state
+									this.setState({
+										files: fileItems.map(fileItem => fileItem.file)
+									});
+								}}>
+							
+							{/* Update current files  */}
+							{this.state.files.map(file => (
+								<File key={file} src={file} origin="local" />
+							))}
+							
+						</FilePond>
+                
+           			</div>
 					<div className="form-group">
 					<input type="submit" value="Create Todo" className="btn btn-primary"/>
 					</div>
