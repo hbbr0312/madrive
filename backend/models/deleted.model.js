@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-let Files = new Schema({
+let Deleted = new Schema({
     user_id: {
         type: String
     },
@@ -13,4 +13,4 @@ let Files = new Schema({
     }
 });
 
-module.exports= mongoose.model('Files',Files);
+module.exports= mongoose.model('Deleted',Deleted);
