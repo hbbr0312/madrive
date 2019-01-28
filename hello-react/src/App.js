@@ -32,7 +32,7 @@ class App extends Component {
 	    						<Link to="/upload" className="nav-link">Upload</Link>
 	    					</li>
 							<li className="navbar-item">
-	    						<Link to="/download" className="nav-link">Download</Link>
+	    						<Link to="/download" className="nav-link">내 파일</Link>
 	    					</li>
 							<li className="navbar-item">
 	    						<Link to="/deleted" className="nav-link">휴지통</Link>

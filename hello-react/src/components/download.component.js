@@ -6,10 +6,10 @@ const Files = props => (
 	<tr>
 		<td>{props.files.filename}</td>
 		<td>{props.files.date}</td>
-		<td>{props.files.form}</td>
 		<td>
-		<input onClick = {()=>{axios.get(`http://socrip4.kaist.ac.kr:3980/download/kimbbr/${props.files.filename}`)
-			.then(response=>(console.log(response)))}} value="Download" className="btn btn-primary"/>
+			<a href={`http://socrip4.kaist.ac.kr:3980/download/kimbbr/${props.files.filename}`}>
+				<input value="Download" className="btn btn-primary"/>
+			</a>
 		</td>
         <td>
 		<input onClick = {()=>{axios.get(`http://socrip4.kaist.ac.kr:3980/tdelete/kimbbr/${props.files.filename}`)
@@ -55,16 +55,14 @@ export default class Download extends Component{
 		return(
 			<div>
 				<h3>My File List</h3>
-				<input onClick = {()=>{axios.get(`http://socrip4.kaist.ac.kr:3980/deleteall/kimbbr`)
+				<input onClick = {()=>{axios.get(`http://socrip4.kaist.ac.kr:3980/tdeleteall/kimbbr`)
 				.then(response=>(console.log(response)))}} value="Delete All" className="btn btn-danger"/>
-				<input onClick = {()=>{axios.get(`http://socrip4.kaist.ac.kr:3980/downloadall/kimbbr`)
-				.then(response=>(console.log(response)))}} value="Download All" className="btn btn-success"/>
+				<a href="http://socrip4.kaist.ac.kr:3980/downloadall/kimbbr"><input value="Download All" className="btn btn-success"/></a>
 				<table className="table table-striped" style={{marginTop:20}}>
 					<thead>
 						<tr>
 							<th>Filename</th>
 							<th>Date</th>
-							<th>Format</th>
 							<th>Download</th>
                             <th>Delete</th>
 						</tr>
