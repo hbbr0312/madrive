@@ -10,53 +10,87 @@ import Download from "./components/download.component";
 import Deleted from "./components/deleted.component";
 import Share from "./components/share.component";
 import logo from "./logo.png";
+import Signin from "./components/login.component";
+import SignUp from "./components/signup.component";
 
 class App extends Component {
-  render() {
-    return (
-    	<Router>
-	    	<div className="container">
-	    		<nav className="navbar navbar-expand-lg navbar-light bg-light">
-	    			<a className="navbar-brand" href="https://naver.com" target="_blank" rel="noopener noreferrer">
-	    				<img src={logo} width="30" height="30" alt="CodingTheSmartWay.com"/>
-	    			</a>
-	    			<Link to ="/" className="navbar-brand">MAdrive</Link>
-	    			<div className="collpse nav-collapse">
-	    				<ul className="navbar-nav mr-auto">
-							<li className="navbar-item">
-	    						<Link to="/" className="nav-link">Todos</Link>
-	    					</li>
-	    					<li className="navbar-item">
-	    						<Link to="/create" className="nav-link">Create Todos</Link>
-	    					</li>
-							<li className="navbar-item">
-	    						<Link to="/upload" className="nav-link">Upload</Link>
-	    					</li>
-							<li className="navbar-item">
-	    						<Link to="/download" className="nav-link">내 파일</Link>
-	    					</li>
-							<li className="navbar-item">
-	    						<Link to="/deleted" className="nav-link">휴지통</Link>
-	    					</li>
-							<li className="navbar-item">
-	    						<Link to="/share" className="nav-link">공유문서함</Link>
-	    					</li>
-	    				</ul>
-	    			</div>
-	    		</nav>
+	constructor(props) {
+		super(props);
+		this.state={
+			text:'hellow',
+			id:''
+		}
+	  }
 
-	    		<Route path="/" exact component={TodosList} />
-		    	<Route path="/edit/:id" component={EditTodo} />
-		    	<Route path="/create" component={CreateTodo} />
-				<Route path="/upload" component={Upload} />
-				<Route path="/download" component={Download} />
-				<Route path="/deleted" component={Deleted} />
-				<Route path="/share" component={Share} />
-	    	</div>
-	    	
-    	</Router>
-      );
+	onLogin(adminId){
+		this.setState({
+			id:adminId
+		});
+	}
+
+	onLogout(){
+		this.setState({
+			userId:''
+		});
+		//cookie.remove('adminId', { path: '/'});
+	}
+
+	render() {
+		
+		let nav;
+		if(this.state.id) {
+			nav = <div className="container">
+			<nav className="navbar navbar-expand-lg navbar-light bg-light">
+					<a className="navbar-brand" href="https://naver.com" target="_blank" rel="noopener noreferrer">
+						<img src={logo} width="30" height="30" alt="CodingTheSmartWay.com"/>
+					</a>
+					<Link to ="/todos" className="navbar-brand">MAdrive</Link>
+					<div className="collpse nav-collapse">
+						<ul className="navbar-nav mr-auto">
+							<li className="navbar-item">
+								<Link to="/todos" className="nav-link">Todos</Link>
+							</li>
+							<li className="navbar-item">
+								<Link to="/create" className="nav-link">Create Todos</Link>
+							</li>
+							<li className="navbar-item">
+								<Link to="/upload" className="nav-link">Upload</Link>
+							</li>
+							<li className="navbar-item">
+								<Link to="/download" className="nav-link">내 파일</Link>
+							</li>
+							<li className="navbar-item">
+								<Link to="/deleted" className="nav-link">휴지통</Link>
+							</li>
+							<li className="navbar-item">
+								<Link to="/" className="nav-link">로그아웃</Link>
+							</li>
+						</ul>
+					</div>
+				</nav>
+			<Route path="/"  exact component={Signin} />
+			<Route path="/signup" component={SignUp} />
+			<Route path="/todos" component={TodosList}/>
+			<Route path="/edit/:id" component={EditTodo} />
+			<Route path="/create" component={CreateTodo} />
+			<Route path="/upload" component={Upload} />
+			<Route path="/download" component={Download} />
+			<Route path="/deleted" component={Deleted} />
+			<Route path="/share" component={Share} />
+		</div>;
+		}else{
+			nav = <div className="container">
+						<h1>Welcome to Mad drive! {this.state.id}</h1>
+						<Signin action = {this.onLogin.bind(this)} text={this.state.text}/>
+					</div>
+		}
+		return (
+			<Router>
+				{nav}
+		</Router>
+		);
   }
 }
+
 
 export default App;

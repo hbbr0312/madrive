@@ -8,6 +8,7 @@
     "filepond": "^3.7.6",
     "filepond-plugin-image-exif-orientation": "^1.0.3",
     "filepond-plugin-image-preview": "^3.1.6",
+    "mongod": "^2.0.0",
     "react": "^16.7.0",
     "react-dom": "^16.7.0",
     "react-filepond": "^5.0.0",
