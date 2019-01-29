@@ -94,7 +94,7 @@ export default class CreateTodo extends Component{
 								value={this.state.todo_description}
 								onChange = {this.onChangeTodoDescription}/>
 					</div>
-					<div className="form=group">
+					<div className="form-group">
 						<label>Responsible: </label>
 						<input type="text"
 								className="form-control"

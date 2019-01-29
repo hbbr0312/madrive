@@ -8,6 +8,7 @@ import TodosList from "./components/todos-list.component";
 import Upload from "./upload.component";
 import Download from "./components/download.component";
 import Deleted from "./components/deleted.component";
+import Share from "./components/share.component";
 import logo from "./logo.png";
 
 class App extends Component {
@@ -37,6 +38,9 @@ class App extends Component {
 							<li className="navbar-item">
 	    						<Link to="/deleted" className="nav-link">휴지통</Link>
 	    					</li>
+							<li className="navbar-item">
+	    						<Link to="/share" className="nav-link">공유문서함</Link>
+	    					</li>
 	    				</ul>
 	    			</div>
 	    		</nav>
@@ -47,6 +51,7 @@ class App extends Component {
 				<Route path="/upload" component={Upload} />
 				<Route path="/download" component={Download} />
 				<Route path="/deleted" component={Deleted} />
+				<Route path="/share" component={Share} />
 	    	</div>
 	    	
     	</Router>
