@@ -228,19 +228,16 @@ app.get('/recoveryall/:id',function(req,res){
 			            console.log(error);
 			        }else{
 			            console.log('deleted temporary success');
+			            fs.rename(path+element.filename,newpath+element.filename,function (err) {
+							if (err) throw err
+							console.log('Successfully moved file!')
+						});
 		        }
-		        fs.rename(path+element.filename,newpath+element.filename,function (err) {
-					if (err) throw err
-					console.log('Successfully moved file!')
-				});
 		    	});
 			});
 			//rimraf.sync('./'+path); //user directory remove
 		}
-	}).deleteMany().exec().then(function(respnose){
-				rimraf.sync('./'+path); //user directory remove
-			});; //user inform remove in db; //user inform remove in db
-
+	}).deleteMany().exec(); //user inform remove in db; //user inform remove in db
 	res.end('ok');
 });
 
@@ -269,18 +266,16 @@ app.get('/tdeleteall/:id',function(req,res){
 			            console.log(error);
 			        }else{
 			            console.log('deleted temporary success');
+			            fs.rename(path+element.filename,newpath+element.filename,function (err) {
+							if (err) throw err
+							console.log('Successfully moved file!')
+						});
 		        }
-		        fs.rename(path+element.filename,newpath+element.filename,function (err) {
-					if (err) throw err
-					console.log('Successfully moved file!')
-				});
-		    	});
-			})
+			});
+			});
 		}
-	}).deleteMany().exec().then(function(respnose){
-				rimraf.sync('./'+path); //user directory remove
-			}); //user inform remove in db
-
+	}).deleteMany().exec()//user inform remove in db
+	
 	res.end('ok');
 });
 
@@ -315,6 +310,11 @@ app.get('/download/:id/:name',function(req,res){
 });
 
 
+app.get('/test',function(req,res){
+	res.download('kimbbr.zip');
+})
+
+
 /**Download all files in user directory*/
 app.get('/downloadall/:id',function(req,res){
 	var user_id = req.params.id;
@@ -337,11 +337,12 @@ app.get('/downloadall/:id',function(req,res){
 	archive.on('error', function(err){
 	    throw err;
 	});
-	archive.directory(path, true, { date: new Date() });
-	archive.finalize().then(function(response){
-		res.download(fileName).then(function(res){
-			fs.unlinkSync(fileName);
-		});
+	archive.directory(path, false, { date: new Date() });
+	archive.finalize();
+	fileOutput.on('close', function(){
+		res.download(fileName);
+		//fs.unlinkSync(fileName);
+	// whole archive process is finished
 	});
 });
 
