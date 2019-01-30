@@ -32,7 +32,9 @@ export default class Signin extends Component {
           this.setState({islogin:true})
           //this.props.onSuccess(this.state.email);
           //console.log(this.state.islogin.toString());
-          this.props.action(this.state.email);
+          this.props.appContext.setState({
+            id:this.state.email
+          })
           //this.props.login.bind(this,this.state.email);
         }else{
           alert("로그인에 실패하였습니다. 아이디와 패스워드를 확인하세요.");
@@ -53,7 +55,6 @@ export default class Signin extends Component {
         <div>
           <form className="form-signin">
             <h2 className="form-signin-heading">LOGIN</h2>
-            <h3>{this.props.text}</h3>
             <label for="inputEmail" className="sr-only">Email address</label>
             <input type="email" onChange={this.handleEmailChange} id="inputEmail" className="form-control" placeholder="Email address" required autofocus />
             <label for="inputPassword" className="sr-only">Password</label>

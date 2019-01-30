@@ -30,7 +30,7 @@ class App extends Component {
 
 	onLogout(){
 		this.setState({
-			userId:''
+			id:''
 		});
 		//cookie.remove('adminId', { path: '/'});
 	}
@@ -38,7 +38,7 @@ class App extends Component {
 	render() {
 		
 		let nav;
-		if(this.state.id) {
+		
 			nav = <div className="container">
 			<nav className="navbar navbar-expand-lg navbar-light bg-light">
 					<a className="navbar-brand" href="https://naver.com" target="_blank" rel="noopener noreferrer">
@@ -78,12 +78,7 @@ class App extends Component {
 			<Route path="/deleted" component={Deleted} />
 			<Route path="/share" component={Share} />
 		</div>;
-		}else{
-			nav = <div className="container">
-						<h1>Welcome to Mad drive! {this.state.id}</h1>
-						<Signin action = {this.onLogin.bind(this)} text={this.state.text}/>
-					</div>
-		}
+		
 		return (
 			<Router>
 				{nav}
