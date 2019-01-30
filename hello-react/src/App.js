@@ -8,7 +8,6 @@ import TodosList from "./components/todos-list.component";
 import Upload from "./upload.component";
 import Download from "./components/download.component";
 import Deleted from "./components/deleted.component";
-import Share from "./components/share.component";
 import logo from "./logo.png";
 import Signin from "./components/login.component";
 import SignUp from "./components/signup.component";
@@ -76,7 +75,6 @@ class App extends Component {
 			<Route path="/upload" component={Upload} />
 			<Route path="/download" component={Download} />
 			<Route path="/deleted" component={Deleted} />
-			<Route path="/share" component={Share} />
 		</div>;
 		
 		return (

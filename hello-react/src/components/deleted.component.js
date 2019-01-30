@@ -7,11 +7,11 @@ const Files = props => (
 		<td>{props.files.date}</td>
 		<td>{props.files.form}</td>
 		<td>
-		<input onClick = {()=>{axios.get(`http://socrip4.kaist.ac.kr:3980/recovery/kimbbr/${props.files.filename}`)
+		<input onClick = {()=>{axios.get(`http://socrip4.kaist.ac.kr:3980/recovery/madcam/${props.files.filename}`)
 			.then(response=>(console.log(response)))}} value="복구" className="btn btn-primary"/>
 		</td>
         <td>
-		<input onClick = {()=>{axios.get(`http://socrip4.kaist.ac.kr:3980/delete/kimbbr/${props.files.filename}`)
+		<input onClick = {()=>{axios.get(`http://socrip4.kaist.ac.kr:3980/delete/madcam/${props.files.filename}`)
 			.then(response=>(console.log(response)))}} value="영구삭제" className="btn btn-warning"/>
 		</td>
 	</tr>
@@ -25,7 +25,7 @@ export default class Deleted extends Component{
 	
 
 	componentDidMount(){
-		axios.get('http://socrip4.kaist.ac.kr:3980/deletedfiles/kimbbr/')
+		axios.get('http://socrip4.kaist.ac.kr:3980/deletedfiles/madcam/')
 			.then(response=>{
 				this.setState({files: response.data});
 			})
@@ -35,7 +35,7 @@ export default class Deleted extends Component{
 	}
 
 	componentDidUpdate() {
-		axios.get('http://socrip4.kaist.ac.kr:3980/deletedfiles/kimbbr/')
+		axios.get('http://socrip4.kaist.ac.kr:3980/deletedfiles/madcam/')
 			.then(response=>{
 				this.setState({files: response.data});
 			})
@@ -54,9 +54,9 @@ export default class Deleted extends Component{
 		return(
 			<div>
 				<h3>My File List</h3>
-				<input onClick = {()=>{axios.get(`http://socrip4.kaist.ac.kr:3980/deleteall/kimbbr`)
+				<input onClick = {()=>{axios.get(`http://socrip4.kaist.ac.kr:3980/deleteall/madcam`)
 				.then(response=>(console.log(response)))}} value="모두 영구 삭제" className="btn btn-danger"/>
-				<input onClick = {()=>{axios.get(`http://socrip4.kaist.ac.kr:3980/recoveryall/kimbbr`)
+				<input onClick = {()=>{axios.get(`http://socrip4.kaist.ac.kr:3980/recoveryall/madcam`)
 				.then(response=>(console.log(response)))}} value="모두 복구" className="btn btn-success"/>
 				<table className="table table-striped" style={{marginTop:20}}>
 					<thead>

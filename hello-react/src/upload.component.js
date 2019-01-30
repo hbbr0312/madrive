@@ -37,7 +37,7 @@ export default class Upload extends Component {
                 <FilePond ref={ref => this.pond = ref}
                           allowMultiple={true} 
                           maxFiles={10} 
-                          server="http://socrip4.kaist.ac.kr:3980/upload/kimbbr/"
+                          server="http://socrip4.kaist.ac.kr:3980/upload/madcam/"
                           oninit={() => this.handleInit() }
                           onupdatefiles={(fileItems) => {
                               // Set current file objects to this.state

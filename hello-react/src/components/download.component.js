@@ -7,12 +7,12 @@ const Files = props => (
 		<td>{props.files.filename}</td>
 		<td>{props.files.date}</td>
 		<td>
-			<a href={`http://socrip4.kaist.ac.kr:3980/download/kimbbr/${props.files.filename}`}>
+			<a href={`http://socrip4.kaist.ac.kr:3980/download/madcam/${props.files.filename}`}>
 				<input value="Download" className="btn btn-primary"/>
 			</a>
 		</td>
         <td>
-		<input onClick = {()=>{axios.get(`http://socrip4.kaist.ac.kr:3980/tdelete/kimbbr/${props.files.filename}`)
+		<input onClick = {()=>{axios.get(`http://socrip4.kaist.ac.kr:3980/tdelete/madcam/${props.files.filename}`)
 			.then(response=>(console.log(response)))}} value="Delete" className="btn btn-warning"/>
 		</td>
 	</tr>
@@ -26,7 +26,7 @@ export default class Download extends Component{
 	
 
 	componentDidMount(){
-		axios.get('http://socrip4.kaist.ac.kr:3980/files/kimbbr/')
+		axios.get('http://socrip4.kaist.ac.kr:3980/files/madcam/')
 			.then(response=>{
 				this.setState({files: response.data});
 			})
@@ -36,7 +36,7 @@ export default class Download extends Component{
 	}
 
 	componentDidUpdate() {
-		axios.get('http://socrip4.kaist.ac.kr:3980/files/kimbbr/')
+		axios.get('http://socrip4.kaist.ac.kr:3980/files/madcam/')
 			.then(response=>{
 				this.setState({files: response.data});
 			})
@@ -55,9 +55,9 @@ export default class Download extends Component{
 		return(
 			<div>
 				<h3>My File List</h3>
-				<input onClick = {()=>{axios.get(`http://socrip4.kaist.ac.kr:3980/tdeleteall/kimbbr`)
+				<input onClick = {()=>{axios.get(`http://socrip4.kaist.ac.kr:3980/tdeleteall/madcam`)
 				.then(response=>(console.log(response)))}} value="Delete All" className="btn btn-danger"/>
-				<a href="http://socrip4.kaist.ac.kr:3980/downloadall/kimbbr"><input value="Download All" className="btn btn-success"/></a>
+				<a href="http://socrip4.kaist.ac.kr:3980/downloadall/madcam"><input value="Download All" className="btn btn-success"/></a>
 				<table className="table table-striped" style={{marginTop:20}}>
 					<thead>
 						<tr>
